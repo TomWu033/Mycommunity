@@ -1,9 +1,6 @@
 package tom.community.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import tom.community.model.User;
 
 @Mapper
@@ -17,6 +14,9 @@ public interface UserMapper {
     @Select("select * from user1 where id = #{id}")
     User findById(@Param("id")Integer id);
 
-    @Select("select * from user1 where account_id = #{account_id}")
-    boolean findByAccount_Id(@Param("account_id")String account_id);
+    @Select("select * from user1 where account_id = #{accountId}")
+    User findByAccountId(@Param("accountId")String accountId);
+
+    @Update("update user1 set name = #{name}, token = #{token}, gmt_modified = #{gmtModified}, avatar_url = #{avatarUrl} where id = #{id}")
+    void update(User dbUser);
 }
