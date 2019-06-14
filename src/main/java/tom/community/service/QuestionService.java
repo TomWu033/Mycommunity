@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tom.community.dto.PaginationDTO;
 import tom.community.dto.QuestionDTO;
+import tom.community.exception.CustomizeErrorCode;
+import tom.community.exception.CustomizeException;
+import tom.community.mapper.QuestionExtMapper;
 import tom.community.mapper.QuestionMapper;
 import tom.community.mapper.UserMapper;
 import tom.community.model.Question;
@@ -24,6 +27,8 @@ public class QuestionService {
     private UserMapper userMapper;
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     public PaginationDTO list(Integer page, Integer size) {
 
@@ -105,6 +110,9 @@ public class QuestionService {
     public QuestionDTO getById(Integer id) {
         //获取question对象
         Question question = questionMapper.selectByPrimaryKey(id);
+        if(question==null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         QuestionDTO questionDTO=new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
         //获取user对象
@@ -118,6 +126,9 @@ public class QuestionService {
             //创建
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
+            question.setViewCount(0);
+            question.setLikeCount(0);
+            question.setCommentCount(0);
             questionMapper.insert(question);
         }
         else{
@@ -131,7 +142,18 @@ public class QuestionService {
             QuestionExample example = new QuestionExample();
             example.createCriteria()
                     .andIdEqualTo(question.getId());
-            questionMapper.updateByExampleSelective(updateQuestion, example);
+            int update=questionMapper.updateByExampleSelective(updateQuestion, example);
+            //校验更新是否成功，不成功抛出异常
+            if (update!=1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
+    }
+
+    public void incView(Integer id) {
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
     }
 }
