@@ -6,13 +6,13 @@ import tom.community.model.User;
 @Data
 public class QuestionDTO {
     //与question模型一样，但多一个关联
-    private Integer id;
+    private Long id;
     private String title;
     private String description;
     private String tag;
-    private long gmtCreate;
-    private long gmtModified;
-    private Integer creator;
+    private Long gmtCreate;
+    private Long gmtModified;
+    private Long creator;
     private Integer viewCount;
     private Integer commentCount;
     private Integer likeCount;

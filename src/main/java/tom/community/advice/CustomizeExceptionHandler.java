@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 @ControllerAdvice
 public class CustomizeExceptionHandler {
     @ExceptionHandler(Exception.class)
-    Object handle(Throwable e, Model model,
+    ModelAndView handle(Throwable e, Model model,
                   HttpServletRequest request,
                   HttpServletResponse response) {
         String contentType=request.getContentType();
@@ -55,7 +55,6 @@ public class CustomizeExceptionHandler {
             else{
                 model.addAttribute("message",CustomizeErrorCode.SYS_ERROR.getMessage());
             }
-
             return new ModelAndView("error");
         }
     }

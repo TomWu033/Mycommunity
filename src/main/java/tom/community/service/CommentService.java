@@ -2,6 +2,7 @@ package tom.community.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tom.community.enums.CommentTypeEnum;
 import tom.community.exception.CustomizeErrorCode;
 import tom.community.exception.CustomizeException;
@@ -23,6 +24,7 @@ public class CommentService {
     @Autowired
     private QuestionExtMapper questionExtMapper;
 
+    @Transactional//将以下方法作为一个事务，某一步不成功，事务回滚
     public void insert(Comment comment) {
         //问题必须存在
         if (comment.getParentId()==null||comment.getParentId()==0){

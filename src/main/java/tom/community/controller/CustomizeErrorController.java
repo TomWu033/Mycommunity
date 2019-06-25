@@ -24,7 +24,7 @@ public class CustomizeErrorController implements ErrorController {
         return "error";
     }
     @RequestMapping(
-            produces = {"text/html"}
+            produces = MediaType.TEXT_HTML_VALUE
     )
     public ModelAndView errorHtml(HttpServletRequest request,
                                   Model model) {
@@ -44,7 +44,7 @@ public class CustomizeErrorController implements ErrorController {
         } else {
             try {
                 return HttpStatus.valueOf(statusCode);
-            } catch (Exception var4) {
+            } catch (Exception ex) {
                 return HttpStatus.INTERNAL_SERVER_ERROR;
             }
         }
