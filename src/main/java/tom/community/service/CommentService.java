@@ -8,10 +8,7 @@ import tom.community.dto.CommentDTO;
 import tom.community.enums.CommentTypeEnum;
 import tom.community.exception.CustomizeErrorCode;
 import tom.community.exception.CustomizeException;
-import tom.community.mapper.CommentMapper;
-import tom.community.mapper.QuestionExtMapper;
-import tom.community.mapper.QuestionMapper;
-import tom.community.mapper.UserMapper;
+import tom.community.mapper.*;
 import tom.community.model.*;
 
 import java.util.ArrayList;
@@ -35,6 +32,9 @@ public class CommentService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private CommentExtMapper commentExtMapper;
+
     @Transactional//将以下方法作为一个事务，某一步不成功，事务回滚
     public void insert(Comment comment) {
         //问题必须存在
@@ -51,6 +51,11 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
             commentMapper.insert(comment);
+            //增加子评论数
+            Comment parentComment = new Comment();
+            parentComment.setId(comment.getParentId());
+            parentComment.setCommentCount(1);
+            commentExtMapper.incCommentCount(parentComment);
         }
         else{
             //回复问题
@@ -64,11 +69,12 @@ public class CommentService {
         }
     }
 
-    public List<CommentDTO> listByQuestionId(Long id) {
+    public List<CommentDTO> listByTargetId(Long id, CommentTypeEnum type) {
         CommentExample commentExample = new CommentExample();
         commentExample.createCriteria()
                 .andParentIdEqualTo(id)
-                .andTypeEqualTo(CommentTypeEnum.QUESTION.getType());
+                .andTypeEqualTo(type.getType());
+        commentExample.setOrderByClause("gmt_create desc");//创建时间的倒叙，sql语句
         List<Comment> comments = commentMapper.selectByExample(commentExample);
         if (comments.size()==0)
             return new ArrayList<>();

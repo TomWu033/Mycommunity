@@ -4,10 +4,13 @@ import lombok.Data;
 import tom.community.exception.CustomizeErrorCode;
 import tom.community.exception.CustomizeException;
 
+import java.util.List;
+
 @Data
-public class ResultDTO {
+public class ResultDTO<T> {
     private Integer code;//
     private String message;//提示信息
+    private T data;
 
     public static ResultDTO errorOf(Integer code,String message){
         ResultDTO resultDTO = new ResultDTO();
@@ -19,7 +22,7 @@ public class ResultDTO {
     public static ResultDTO errorOf(CustomizeErrorCode errorCode){
         return errorOf(errorCode.getCode(),errorCode.getMessage());
     }
-    public static Object okOf(){
+    public static ResultDTO okOf(){
         ResultDTO resultDTO = new ResultDTO();
         resultDTO.setCode(200);
         resultDTO.setMessage("请求成功");
@@ -28,5 +31,13 @@ public class ResultDTO {
 
     public static ResultDTO errorOf(CustomizeException e) {
         return errorOf(e.getCode(),e.getMessage());
+    }
+
+    public static <T> ResultDTO okOf(T t){
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setCode(200);
+        resultDTO.setMessage("请求成功");
+        resultDTO.setData(t);
+        return resultDTO;
     }
 }

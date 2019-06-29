@@ -1,16 +1,20 @@
 package tom.community.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tom.community.dto.CommentCreateDTO;
+import tom.community.dto.CommentDTO;
 import tom.community.dto.ResultDTO;
+import tom.community.enums.CommentTypeEnum;
 import tom.community.exception.CustomizeErrorCode;
 import tom.community.model.Comment;
 import tom.community.model.User;
 import tom.community.service.CommentService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class CommentController {
@@ -26,6 +30,9 @@ public class CommentController {
         if(user==null){
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
+        if(commentCreateDTO==null|| StringUtils.isBlank(commentCreateDTO.getContent())){
+            return ResultDTO.errorOf(CustomizeErrorCode.CONTENT_IS_EMPTY);
+        }
 
         Comment comment = new Comment();
         comment.setParentId(commentCreateDTO.getParentId());
@@ -37,5 +44,12 @@ public class CommentController {
         comment.setLikeCount(0L);
         commentService.insert(comment);
         return ResultDTO.okOf();
+    }
+
+    @ResponseBody //可以自动把对象化为JSON传递到前端，RequestBody可以把JSON转为对象
+    @RequestMapping(value = "/comment/{id}",method = RequestMethod.GET)
+    public ResultDTO comments(@PathVariable(name = "id") Long id){
+        List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.COMMENT);
+        return ResultDTO.okOf(commentDTOS);
     }
 }
