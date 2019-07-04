@@ -9,8 +9,8 @@ import java.util.List;
  * 分页的数据传输对象
  */
 @Data
-public class PaginationDTO {
-    private List<QuestionDTO> questions;
+public class PaginationDTO<T> {
+    private List<T> data;
     private boolean showPrevious;//是否没有向前按钮
     private boolean showFirstPage;
     private boolean showNext;
