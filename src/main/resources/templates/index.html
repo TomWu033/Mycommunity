@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Tom社区</title>
@@ -37,7 +37,10 @@
                     <h4 class="media-heading">
                         <a th:href="@{'/question/'+ ${question.id}}" th:text="${question.title}"></a>
                     </h4>
-                    <span th:text="${question.description}"></span><br>
+                    <span th:if="${#strings.length(question.description)} le '10'">
+                        <span th:text="${question.description}"></span>
+                    </span>
+                    <br>
                     <span class="text-desc"><span th:text="${question.commentCount}"></span> 个回复 •
                         <span th:text="${question.viewCount}"></span>次浏览 •
                         <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"> </span>
@@ -48,30 +51,30 @@
                 <ul class="pagination">
                     <li>
                     <li th:if="${pagination.showFirstPage}">
-                        <a href="/?page=1" aria-label="FirstPage">
+                        <a th:href="@{/(page=1,search=${search})}" aria-label="FirstPage">
                             <span aria-hidden="true">&lt;&lt;</span><!--上一页标签-->
                         </a>
                     </li>
                     <li>
                         <li th:if="${pagination.showPrevious}">
-                        <a th:href="@{/(page=${pagination.page - 1})}" aria-label="Previous">
+                        <a th:href="@{/(page=${pagination.page - 1},search=${search})}" aria-label="Previous">
                             <span aria-hidden="true">&lt;</span><!--上一页标签-->
                         </a>
                     </li>
 
                     <li th:each="page : ${pagination.pages}" th:class="${pagination.page==page}?'active':''"><a
-                            th:href="@{/(page=${page})}" th:text="${page}">
+                            th:href="@{/(page=${page},search=${search})}" th:text="${page}">
                     </a>
 
                     <li>
                     <li th:if="${pagination.showNext}">
-                        <a th:href="@{/(page=${pagination.page + 1})}" aria-label="Next">
+                        <a th:href="@{/(page=${pagination.page + 1},search=${search})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span><!--上一页标签-->
                         </a>
                     </li>
                     <li>
                     <li th:if="${pagination.showEndPage}">
-                        <a th:href="@{/(page=${pagination.totalPage})}" aria-label="EndPage">
+                        <a th:href="@{/(page=${pagination.totalPage},search=${search})}" aria-label="EndPage">
                             <span aria-hidden="true">&gt;&gt;</span><!--上一页标签-->
                         </a>
                     </li>
