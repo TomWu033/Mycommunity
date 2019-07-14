@@ -125,3 +125,7 @@ body {
     white-space: normal;
     display: inline-block;
 }
+.footer{
+    padding: 10px 30%;
+    color: #666;
+}
