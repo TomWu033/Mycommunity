@@ -1,0 +1,15 @@
+2019-07-15 16:36:33.405  INFO 12612 --- [restartedMain] tom.community.CommunityApplication       : Starting CommunityApplication on USER-20170411RH with PID 12612 (D:\code\community\target\classes started by Administrator in D:\code\community)
+2019-07-15 16:36:33.405  INFO 12612 --- [restartedMain] tom.community.CommunityApplication       : No active profile set, falling back to default profiles: default
+2019-07-15 16:36:34.155  INFO 12612 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-07-15 16:36:34.155  INFO 12612 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-07-15 16:36:34.217  WARN 12612 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2019-07-15 16:36:45.833  INFO 12612 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8887 (http)
+2019-07-15 16:36:46.036  INFO 12612 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-15 16:36:46.036  INFO 12612 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.19]
+2019-07-15 16:36:46.833  INFO 12612 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-15 16:36:46.833  INFO 12612 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 12678 ms
+2019-07-15 16:36:50.162  INFO 12612 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-15 16:36:50.860  INFO 12612 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-15 16:36:53.641  INFO 12612 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-07-15 16:36:53.845  INFO 12612 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8887 (http) with context path ''
+2019-07-15 16:36:53.891  INFO 12612 --- [restartedMain] tom.community.CommunityApplication       : Started CommunityApplication in 22.956 seconds (JVM running for 37.635)
