@@ -1,5 +1,6 @@
 package tom.community.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 public class AuthorizeController {
 
     @Autowired//自动将spring容器写好的实例加载到这
@@ -61,6 +63,7 @@ public class AuthorizeController {
             return "redirect:/";//callback后跳转到index
         }
         else {
+            log.error("callback get github error,{}",githubUser);//追加日志，用户登录失败，上面的@sjf4j是lombok注解，直接添加log
             //登录失败，重新登录
             return "redirect:/";
         }
