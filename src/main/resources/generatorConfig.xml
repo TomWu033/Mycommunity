@@ -35,5 +35,6 @@
 
         <table tableName="comment" domainObjectName="Comment" ></table>
         <table tableName="notification" domainObjectName="Notification" ></table>
+        <table tableName="login_ticket" domainObjectName="LoginTicket" ></table>
     </context>
 </generatorConfiguration>

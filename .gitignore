@@ -1,7 +1,8 @@
 HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
-logs/git
+logs/
+/src/test/java/tom/community/MultiThreadTests.java
 ### STS ###
 .apt_generated
 .classpath

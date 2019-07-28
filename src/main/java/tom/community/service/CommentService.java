@@ -40,6 +40,7 @@ public class CommentService {
     @Autowired
     private NotificationMapper notificationMapper;
 
+
     @Transactional//将以下方法作为一个事务，某一步不成功，事务回滚
     public void insert(Comment comment, User commentator) {
         //问题必须存在
@@ -84,7 +85,6 @@ public class CommentService {
 
     private void createNotify(Comment comment, Long receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
         if (receiver.equals(comment.getCommentator())) {
-            System.out.println("AAa");
             return;
         }
         Notification notification = new Notification();
@@ -129,5 +129,9 @@ public class CommentService {
         }).collect(Collectors.toList());
 
         return commentDTOS;
+    }
+
+    public Comment getComment(Long commentId) {
+        return commentMapper.selectByPrimaryKey(commentId);
     }
 }

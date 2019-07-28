@@ -130,3 +130,31 @@ function selectTag(e){
 function showSelectTag(){
     $("#select-tag").show();
 }
+
+function like(commentId) {
+    $.ajax({
+        type: "POST",
+        url: "/like",
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "commentId": commentId
+        }),
+        success: function (response) {
+            if (response.code == 200) {
+                window.location.reload();
+            } else {
+                if (response.code == 2003) {
+                    var isAccepted = confirm(response.message);
+                    if (isAccepted) {
+                        //未登录跳转
+                        window.open("https://github.com/login/oauth/authorize?client_id=92fc6d1aca013000cd7f&redirect_uri=http://localhost:8887/callback&scope=user&state=1");
+                        window.localStorage.setItem("closable", true);
+                    }
+                } else {
+                    alert(response.message);
+                }
+            }
+        },
+        dataType: "json"
+    });
+}

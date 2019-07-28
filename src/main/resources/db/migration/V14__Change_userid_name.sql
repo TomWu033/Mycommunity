@@ -1,0 +1,1 @@
+alter table LOGIN_TICKET alter column USERID rename to USER_ID;

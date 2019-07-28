@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tom.community.dto.AccessTokenDTO;
 import tom.community.dto.GithubUser;
 import tom.community.mapper.UserMapper;
+import tom.community.model.LoginTicket;
+import tom.community.model.LoginTicketExample;
 import tom.community.model.User;
 import tom.community.provider.GithubProvider;
 import tom.community.service.UserService;
@@ -16,6 +18,7 @@ import tom.community.service.UserService;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -68,16 +71,6 @@ public class AuthorizeController {
             return "redirect:/";
         }
     }
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request,
-                         HttpServletResponse response){
-        //删除Session
-        request.getSession().removeAttribute("user");
-        //删除cookie
-        Cookie cookie=new Cookie("token",null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        return "redirect:/";
-    }
+
 
 }

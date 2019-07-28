@@ -1,0 +1,1 @@
+alter table LOGIN_TICKET alter column USER_ID bigint not null;

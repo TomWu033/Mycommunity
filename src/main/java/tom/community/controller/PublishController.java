@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.HtmlUtils;
 import tom.community.cache.TagCache;
 import tom.community.dto.QuestionDTO;
 import tom.community.mapper.QuestionMapper;
 import tom.community.model.Question;
 import tom.community.model.User;
 import tom.community.service.QuestionService;
+import tom.community.service.SensitiveService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,10 +23,10 @@ import javax.servlet.http.HttpServletRequest;
 public class PublishController {
 
     @Autowired
-    private QuestionMapper questionMapper;
+    private QuestionService questionService;
 
     @Autowired
-    private QuestionService questionService;
+    private SensitiveService sensitiveService;
 
     @GetMapping("/publish/{id}")
     public String edit(@PathVariable(name = "id") Long id,
@@ -88,6 +90,14 @@ public class PublishController {
         question.setTag(tag);
         question.setCreator(user.getId());
         question.setId(id);
+        //html标签过滤会被转义
+        //question.setDescription(HtmlUtils.htmlEscape(question.getDescription()));
+        question.setTitle(HtmlUtils.htmlEscape(question.getTitle()));
+        //敏感词过滤
+        question.setTitle(sensitiveService.filter(question.getTitle()));
+        question.setDescription(sensitiveService.filter(question.getDescription()));
+
+
 
         questionService.createOrUpdate(question);
         return "redirect:/";//重定向至首页

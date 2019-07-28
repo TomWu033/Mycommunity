@@ -7,6 +7,12 @@ body {
     margin: 30px;
 }
 
+.main-login {
+    background-color: white;
+    margin: 30px 25%;
+    width: 50%;
+}
+
 .btn-publish {
     float: right;
     margin-bottom: 15px;
@@ -50,6 +56,16 @@ body {
     margin-bottom: 10px;
 }
 
+.btn-login {
+    margin-left: 27%;
+    margin-bottom: 20px;
+}
+
+.btn-register {
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
 .comments {
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
@@ -70,6 +86,9 @@ body {
     font-size: 15px;
     cursor: pointer;
 }
+.menu .thumb{
+    color: #499ef3;
+}
 
 .menu .comment-icon {
     font-size: 15px;
@@ -88,18 +107,21 @@ body {
     margin-top: 25px;
 }
 
-.question-tag{
+.question-tag {
     margin-right: 5px;
 }
-.question-related{
+
+.question-related {
     line-height: 20px;
     font-size: 13px;
     list-style: none;
     padding-left: 0;
 }
-.question-img{
+
+.question-img {
     width: 100%;
 }
+
 .menu .active {
     color: #499ef3;
 }
@@ -115,17 +137,23 @@ body {
     margin: 10px 0;
 }
 
-.publish-tag-tab{
+.publish-tag-tab {
     display: none;
     margin-top: 10px;
     padding-top: 10px;
 }
-.publish-tag-tab .label-info{
+
+.publish-tag-tab .label-info {
     margin: 5px 5px;
     white-space: normal;
     display: inline-block;
 }
-.footer{
+
+.footer {
     padding: 10px 30%;
     color: #666;
+}
+
+.btn-git{
+    vertical-align: middle;
 }
