@@ -1,6 +1,0 @@
-2019-07-20 14:38:29.224  INFO 4336 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8887 (http) with context path ''
-2019-07-20 14:38:29.231  INFO 4336 --- [restartedMain] tom.community.CommunityApplication       : Started CommunityApplication in 5.787 seconds (JVM running for 7.068)
-2019-07-20 14:38:52.252  INFO 4336 --- [http-nio-8887-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-07-20 14:38:52.253  INFO 4336 --- [http-nio-8887-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-07-20 14:38:52.264  INFO 4336 --- [http-nio-8887-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
-2019-07-20 14:43:22.352  INFO 4336 --- [Thread-5] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
