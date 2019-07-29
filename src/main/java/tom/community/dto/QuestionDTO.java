@@ -15,6 +15,8 @@ public class QuestionDTO {
     private Long creator;
     private Integer viewCount;
     private Integer commentCount;
-    private Integer likeCount;
+    private Long likeCount;
     private User user;
+    private Long followerCount;
+    private Boolean followed;
 }

@@ -190,4 +190,8 @@ public class QuestionService {
 
         return questionDTOS;
     }
+
+    public Question getQuestion(long entityId) {
+        return questionMapper.selectByPrimaryKey(entityId);
+    }
 }

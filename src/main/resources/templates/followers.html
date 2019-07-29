@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="我的粉丝"></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+<body>
+<div th:insert="~{navigation :: nav}"></div>
+<div class="container-fluid main profile">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2><span th:text="我的粉丝"></span></h2>
+            <hr><!--分割线-->
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="media" th:each="follower : ${followers}">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object"
+                                 th:src="${follower.getAvatarUrl()}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <span th:text="${follower.getName()}"></span>
+                        </h4>
+                        <span class="text-desc"><span th:text="${follower.getFollowerCount()}"></span> 个粉丝 •
+                        <span th:text="${follower.getFolloweeCount()}"></span>个关注 •
+                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

@@ -72,7 +72,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         /*
         //页面渲染时可以加user
         if (modelAndView!=null){
-            modelAndView.addObject("user",hostHolder.getUser());
+            modelAndView.addObject("user",hostHolder.getUserName());
         }*/
     }
 

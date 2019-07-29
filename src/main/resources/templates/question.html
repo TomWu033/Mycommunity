@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/community.css">
-    <link rel="stylesheet" href="/css/editormd.preview.min.css" >
+    <link rel="stylesheet" href="/css/editormd.preview.min.css">
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
     <script src="/js/moment.js"></script>
@@ -26,7 +26,9 @@
                 <span class="text-desc">
                 作者：<span th:text="${question.user.name}"></span>|
                 发布时间：<span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>|
-                阅读数：<span th:text="${question.viewCount}"></span>
+                阅读数：<span th:text="${question.viewCount}"></span>|
+                    点赞数：<span th:text="${question.likeCount}"></span>|
+                    关注数：<span th:text="${question.followerCount}"></span>
             </span>
                 <!--                内容-->
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><!--分割线-->
@@ -34,7 +36,7 @@
                     <textarea style="display:none;" th:text="${question.description}"></textarea>
                 </div>
                 <script type="text/javascript">
-                    $(function() {
+                    $(function () {
                         editormd.markdownToHTML("question-view", {});
                     });
                 </script>
@@ -54,6 +56,13 @@
                        th:if="${session.user !=null&&session.user.id==question.creator}">
                         <span class="glyphicon glyphicon-edit" aria-hidden="true">编辑</span>
                     </a>
+                    <button type="button" class="btn btn-success btn-sm pull-right"
+                            th:onclick="'javascript:followQuestion('+${question.id}+')'"
+                            th:if="${question.followed==false}">关注
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm pull-right" disabled="disabled"
+                            th:if="${question.followed==true}">已关注
+                    </button>
                 </div>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             </div>
@@ -77,14 +86,15 @@
                             </h5>
                             <div th:text="${comment.content}"></div>
                             <div class="menu">
-                                <span class="icon" th:class="${comment.liked==1}?'glyphicon glyphicon-thumbs-up thumb':'glyphicon glyphicon-thumbs-up icon'"
-                                      th:onclick="'javascript:like('+${comment.id}+')'" th:text="${comment.likeCount}"></span>
+                                <span class="icon"
+                                      th:class="${comment.liked==1}?'glyphicon glyphicon-thumbs-up thumb':'glyphicon glyphicon-thumbs-up icon'"
+                                      th:onclick="'javascript:like('+${comment.id}+')'"
+                                      th:text="${comment.likeCount}"></span>
                                 <span th:data-id="${comment.id}"
                                       onclick="collapseComments(this)" class="comment-icon">
                                     <span class="glyphicon glyphicon-comment"></span>
                                     <span th:text="${comment.commentCount}"></span>
                                 </span>
-
                                 <span class="pull-right"
                                       th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd')}"></span>
                             </div>
@@ -150,13 +160,13 @@
                     </div>
                 </div>
             </div>
-<!--            图片-->
+            <!--            图片-->
             <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4>吉祥物</h4>
                 <img class="question-img img-thumbnail" src="/images/timg.png">
             </div>
-<!--            相关问题-->
+            <!--            相关问题-->
             <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4>相关问题</h4>

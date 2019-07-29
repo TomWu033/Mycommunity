@@ -5,7 +5,9 @@ public enum EventType {
     REPLY_QUESTION(1),
     REPLY_COMMENT(2),
     LOGIN(5),
-    MAIL(4);
+    MAIL(4),
+    FOLLOW(6),
+    UNFOLLOW(7);
     private int value;
 
     EventType(int value) {

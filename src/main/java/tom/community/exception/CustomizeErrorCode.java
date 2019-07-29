@@ -10,7 +10,9 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     CONTENT_IS_EMPTY(2007,"输入内容不能为空"),
     READ_NOTIFICATION_FAIL(2008,"通知人信息错误"),
     NOTIFICATION_NOT_FOUND(2009,"通知消息不见了"),
-    FILE_UPLOAD_FAIL(2010,"图片上传失败")
+    FILE_UPLOAD_FAIL(2010,"图片上传失败"),
+    FOLLOW_FAIL(2011,"关注失败"),
+    UNFOLLOW_FAIL(2012,"取消关注失败")
     ;
 
     private String message;

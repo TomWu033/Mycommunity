@@ -126,8 +126,12 @@ public class UserService {
         return loginTicket.getTicket();
     }
 
-    public String getUser(long actorId) {
+    public String getUserName(long actorId) {
         User user=userMapper.selectByPrimaryKey(actorId);
         return user.getName();
+    }
+
+    public User getUser(Long uid) {
+        return userMapper.selectByPrimaryKey(uid);
     }
 }

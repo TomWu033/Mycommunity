@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${sectionName}"></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+<body>
+<div th:insert="~{navigation :: nav}"></div>
+<div class="container-fluid main profile">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2><span th:text="${sectionName}"></span></h2>
+            <hr><!--分割线-->
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:if="${section=='users'}">
+                <div class="media" th:each="followee :${followees}">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object"
+                                 th:src="${followee.getAvatarUrl()}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <span th:text="${followee.getName()}"></span>
+                        </h4>
+                        <span class="text-desc"><span th:text="${followee.getFollowerCount()}"></span> 个粉丝 •
+                        <span th:text="${followee.getFolloweeCount()}"></span>个关注 •</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:if="${section=='questions'}">
+                <div class="media" th:each="question : ${followquestions}">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object"
+                                 th:src="${question.getUser().avatarUrl}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a th:href="@{'/question/'+ ${question.getId()}}" th:text="${question.getTitle()}"></a>
+                        </h4>
+                        <span th:text="${question.getDescription()}"></span><br>
+                        <span class="text-desc"><span th:text="${question.getCommentCount()}"></span> 个回复 •
+                        <span th:text="${question.getViewCount()}"></span>次浏览 •
+                            <span th:text="${question.getLikeCount()}"></span>次点赞 •
+                            <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"> •</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <div class="list-group section">
+                <a th:href="@{'/user/'+${session.user.id}+'/followees/users'}"
+                   th:class="${section=='users'}?'active list-group-item':'list-group-item'">关注的人</a>
+                <a th:href="@{'/user/'+${session.user.id}+'/followees/questions'}"
+                   th:class="${section=='questions'}?'active list-group-item':'list-group-item'">关注的问题</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import tom.community.async.EventModel;
 import tom.community.async.EventProducer;
 import tom.community.async.EventType;
-import tom.community.dto.LikeDTO;
+import tom.community.dto.PostDTO;
 import tom.community.dto.QuestionDTO;
 import tom.community.dto.ResultDTO;
 import tom.community.enums.CommentTypeEnum;
@@ -39,12 +39,12 @@ public class LikeController {
 
     @PostMapping("/like")
     @ResponseBody
-    public Object like(@RequestBody LikeDTO likeDTO){
+    public Object like(@RequestBody PostDTO postDTO){
         User user = hostHolder.getUser();
         if (user==null){
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
-        Long commentId = likeDTO.getCommentId();
+        Long commentId = postDTO.getEntityId();
         Comment comment=commentService.getComment(commentId);
         QuestionDTO questionDTO=questionService.getById(comment.getParentId());
         eventProducer.fireEvent(new EventModel(EventType.LIKE).setActorId(hostHolder.getUser().getId())
@@ -56,7 +56,7 @@ public class LikeController {
 
     @PostMapping("/dislike")
     @ResponseBody
-    public Object dislike(@RequestParam(value = "commentId") Long commentId,
+    public Object dislike(@RequestParam(value = "entityId") Long commentId,
                        HttpServletRequest request){
         User user =(User) request.getSession().getAttribute("user");
         if (user==null){
