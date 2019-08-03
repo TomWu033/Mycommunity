@@ -12,7 +12,8 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     NOTIFICATION_NOT_FOUND(2009,"通知消息不见了"),
     FILE_UPLOAD_FAIL(2010,"图片上传失败"),
     FOLLOW_FAIL(2011,"关注失败"),
-    UNFOLLOW_FAIL(2012,"取消关注失败")
+    UNFOLLOW_FAIL(2012,"取消关注失败"),
+    USER_NOT_FOUND(2013,"用户不存在"),
     ;
 
     private String message;

@@ -1,1 +1,1 @@
-alter table LOGIN_TICKET alter column USERID rename to USER_ID;
+alter table login_ticket change userid user_id int not null;

@@ -60,6 +60,12 @@
             <artifactId>h2</artifactId>
             <version>1.4.199</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.17</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
@@ -112,10 +118,6 @@
         </dependency>
     </dependencies>
 
-
-
-
-
     <build>
         <plugins>
             <plugin>
@@ -127,15 +129,15 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.4</version>
                 <configuration>
-                    <url>jdbc:h2:~/community</url>
-                    <user>tom</user>
-                    <password>123</password>
+                    <url>jdbc:mysql://localhost:3306/wenda?serverTimezone=UTC</url>
+                    <user>root</user>
+                    <password>123456</password>
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>1.4.199</version>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.17</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -145,9 +147,9 @@
                 <version>1.3.7</version>
                 <dependencies>
                     <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>1.4.199</version>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.17</version>
                     </dependency>
                 </dependencies>
             </plugin>

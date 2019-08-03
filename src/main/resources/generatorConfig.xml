@@ -6,10 +6,10 @@
 <generatorConfiguration>
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
-        <jdbcConnection driverClass="org.h2.Driver"
-                        connectionURL="jdbc:h2:~/community"
-                        userId="tom"
-                        password="123">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/wenda?serverTimezone=UTC"
+                        userId="root"
+                        password="123456">
         </jdbcConnection>
 
         <javaTypeResolver >
@@ -36,5 +36,6 @@
         <table tableName="comment" domainObjectName="Comment" ></table>
         <table tableName="notification" domainObjectName="Notification" ></table>
         <table tableName="login_ticket" domainObjectName="LoginTicket" ></table>
+        <table tableName="feed" domainObjectName="Feed" ></table>
     </context>
 </generatorConfiguration>

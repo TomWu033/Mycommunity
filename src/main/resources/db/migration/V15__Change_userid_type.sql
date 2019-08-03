@@ -1,1 +1,1 @@
-alter table LOGIN_TICKET alter column USER_ID bigint not null;
+alter table login_ticket modify user_id bigint not null;
